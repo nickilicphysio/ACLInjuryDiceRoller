@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Step Up, Step Up | Nick Ilic Physio Clinician</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #32374D;
+    --box: #3D4260;
+    --box-hover: #454B6E;
+    --gold: #F9B932;
+    --gold-mid: #FBCD61;
+    --gold-light: #FDE8A8;
+    --white: #FFFFFF;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    font-family: 'Montserrat', sans-serif;
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    padding: 32px 16px;
+  }
+  .wrap { width: 100%; max-width: 580px; }
+  .screen { display: none; }
+  .screen.active { display: block; animation: fadeIn 0.25s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  .brand {
+    font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--gold); text-align: center; margin-bottom: 6px;
+  }
+
+  .marquee-border {
+    border: 3px dashed var(--gold);
+    border-radius: 18px;
+    padding: 36px 24px;
+    text-align: center;
+    position: relative;
+  }
+  .marquee-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 34px;
+    line-height: 1.15;
+    color: var(--gold);
+    margin: 0 0 10px;
+    text-shadow: 0 2px 0 rgba(0,0,0,0.2);
+  }
+  .marquee-sub {
+    font-size: 15px;
+    color: var(--white);
+    opacity: 0.85;
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+  .marquee-fine {
+    font-size: 12px;
+    color: var(--gold-mid);
+    font-style: italic;
+    margin-bottom: 26px;
+  }
+
+  .big-btn {
+    display: block;
+    width: 100%;
+    background: var(--gold);
+    color: var(--bg);
+    border: none;
+    border-radius: 30px;
+    padding: 16px 24px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: transform 0.1s, background 0.15s;
+  }
+  .big-btn:hover { background: var(--gold-mid); }
+  .big-btn:active { transform: scale(0.97); }
+  .ghost-btn {
+    display: block;
+    width: 100%;
+    background: transparent;
+    color: rgba(255,255,255,0.6);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 30px;
+    padding: 12px 24px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  .ghost-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  h2.chapter-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    text-align: center;
+    color: var(--white);
+    margin: 0 0 4px;
+  }
+  .chapter-sub {
+    text-align: center;
+    font-size: 13px;
+    color: var(--gold-mid);
+    margin-bottom: 22px;
+    font-style: italic;
+  }
+  .path-card {
+    background: var(--box);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .path-card:hover { background: var(--box-hover); transform: translateX(2px); }
+  .path-card .path-title {
+    font-weight: 800;
+    font-size: 15px;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .path-card .path-teaser {
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.4;
+  }
+
+  .scene-box {
+    background: var(--box);
+    border-radius: 16px;
+    padding: 22px 22px;
+    margin-bottom: 20px;
+  }
+  .scene-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .scene-text {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--white);
+  }
+  .subchoice-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .subchoice-btn {
+    flex: 1;
+    background: rgba(255,255,255,0.08);
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 12px 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+  }
+  .subchoice-btn:hover, .subchoice-btn.selected {
+    background: var(--gold);
+    color: var(--bg);
+    border-color: var(--gold);
+  }
+
+  .die-area { display: flex; justify-content: center; margin: 20px 0; }
+  .die {
+    width: 150px; height: 150px;
+    background: var(--box);
+    border-radius: 24px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 48px; font-weight: 800; color: var(--gold);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+  .die.rolling { animation: shake 0.08s infinite; }
+  @keyframes shake {
+    0% { transform: rotate(-2deg) scale(1.02); }
+    50% { transform: rotate(2deg) scale(0.98); }
+    100% { transform: rotate(-2deg) scale(1.02); }
+  }
+
+  .result-banner {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  .result-banner.hit { color: var(--gold); }
+  .result-banner.miss { color: var(--white); }
+  .result-narrative {
+    background: var(--box);
+    border-radius: 14px;
+    padding: 18px 20px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 20px;
+  }
+
+  .tally {
+    background: var(--box);
+    border-radius: 14px;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .tally-item .num { font-size: 20px; font-weight: 800; color: var(--gold); display: block; }
+  .tally-item .label { font-size: 10.5px; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.5px; }
+
+  .btn-row { display: flex; gap: 10px; margin-bottom: 8px; }
+  .btn-row .big-btn, .btn-row .ghost-btn { margin-top: 0; }
+
+  .disclaimer {
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    line-height: 1.5;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 16px;
+    margin-top: 22px;
+  }
+  .footer { text-align: center; font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 10px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">Nick Ilic &middot; Physio Clinician</div>
+
+  <div class="screen active" id="screen-splash">
+    <div class="marquee-border">
+      <div class="marquee-title">STEP UP, STEP UP!</div>
+      <div class="marquee-sub">Choose your path. Roll the dice. Find out which version of the story you land in.</div>
+      <div class="marquee-fine">A Choose Your Own (Mis)Adventure in ACL odds</div>
+      <button class="big-btn" onclick="goTo('screen-paths')">STEP UP TO THE BOOTH</button>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-paths">
+    <h2 class="chapter-heading">Choose Your Chapter</h2>
+    <div class="chapter-sub">Every path uses real odds from real research. Pick the one closest to your story.</div>
+    <div id="pathList"></div>
+    <button class="ghost-btn" onclick="goTo('screen-splash')">&larr; Back to the booth</button>
+  </div>
+
+  <div class="screen" id="screen-scene">
+    <div class="scene-box">
+      <div class="scene-label" id="sceneLabel">Chapter</div>
+      <div class="scene-text" id="sceneText"></div>
+      <div class="subchoice-row" id="subchoiceRow" style="display:none;"></div>
+    </div>
+
+    <div class="die-area">
+      <div class="die" id="die">?</div>
+    </div>
+
+    <button class="big-btn" id="rollBtn" onclick="roll()">ROLL THE DICE</button>
+    <button class="ghost-btn" onclick="goTo('screen-paths')">&larr; Choose a different chapter</button>
+  </div>
+
+  <div class="screen" id="screen-result">
+    <div class="result-banner" id="resultBanner"></div>
+    <div class="result-narrative" id="resultNarrative"></div>
+
+    <div class="tally">
+      <div class="tally-item"><span class="num" id="tallyRolls">0</span><span class="label">Rolls</span></div>
+      <div class="tally-item"><span class="num" id="tallyHits">0</span><span class="label" id="tallyHitsLabel">Hits</span></div>
+      <div class="tally-item"><span class="num" id="tallyActual">--</span><span class="label">Actual rate</span></div>
+    </div>
+
+    <div class="btn-row">
+      <button class="big-btn" onclick="goTo('screen-scene')">ROLL AGAIN</button>
+      <button class="ghost-btn" onclick="goTo('screen-paths')">NEW CHAPTER</button>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    This shows population-level odds, not a prediction for any one person. Individual risk depends on age, graft type, sport, timing, psychological readiness, and more &mdash; see the full breakdown in the post.
+  </div>
+  <div class="footer">nickilicphysio.substack.com</div>
+</div>
+
+<script>
+const PATHS = [
+  {
+    key: "comeback",
+    title: "The Comeback",
+    teaser: "Rehab's done. You're back like nothing happened. Or are you?",
+    label: "Chapter One &mdash; The Comeback",
+    scene: "Rehab's finished. The box is ticked. You're back in the game like nothing ever happened. Somewhere out there, this exact scenario ends differently for about 1 in 10 people who walked the exact same road.",
+    percent: 10,
+    hitLabel: "THE GRAFT GAVE WAY",
+    hitNarrative: "Not because anyone cut a corner. Sometimes the number just lands on you &mdash; that's what \"1 in 10\" actually means. This is the conversation the rest of the post is built around.",
+    missLabel: "THE GRAFT HELD",
+    missNarrative: "This time. That doesn't make the next roll a sure thing either &mdash; that's what odds mean. Roll again to see the shape of it."
+  },
+  {
+    key: "returnToSport",
+    title: "The Return to Sport",
+    teaser: "Cleared every test. First game back in a pivoting sport. Now what?",
+    label: "Chapter Two &mdash; The Return to Sport",
+    scene: "You've cleared every test &mdash; quads even, hops symmetrical, confidence high. First game back in a genuine cutting and pivoting sport. Somewhere between 23 and 30 out of every 100 athletes in your exact shoes don't make it through the next two years unscathed.",
+    percent: 27,
+    hitLabel: "SECOND ACL INJURY",
+    hitNarrative: "Either side. This is the number the piece calls the one that actually applies to a young athlete back on court &mdash; not the older, all-comers figures usually quoted.",
+    missLabel: "CLEAN TWO YEARS",
+    missNarrative: "No second injury on this roll. Worth remembering: this was never a guarantee, just better odds than the number that landed on someone else."
+  },
+  {
+    key: "secondSurgery",
+    title: "The Second Surgery",
+    teaser: "The first graft didn't hold. You're back in, older and wiser. Third time?",
+    label: "Chapter Three &mdash; The Second Surgery",
+    scene: "The first graft didn't hold. You're back in for a revision, older and wiser about the whole process this time. Roughly 1 in 4 people on this exact path end up back here a third time.",
+    percent: 27,
+    hitLabel: "THIRD ACL INJURY",
+    hitNarrative: "Either side, within a few years. This is the number worth having in the room before round two even starts &mdash; not to scare anyone, just to make the second conversation an honest one.",
+    missLabel: "NO THIRD INJURY",
+    missNarrative: "This roll landed clear. Three in four do."
+  },
+  {
+    key: "leapChoice",
+    title: "The LEAP Decision",
+    teaser: "Your surgeon offers an extra procedure. Add it, or skip it?",
+    label: "Chapter Four &mdash; The LEAP Decision",
+    scene: "Your surgeon mentions an extra stabilising procedure &mdash; a LEAP &mdash; bolted onto the revision. It isn't free: more lateral-sided pain early on, a longer road back. Do you add it?",
+    hasSubchoice: true,
+    subchoices: [
+      { label: "Add the LEAP", percent: 5.6 },
+      { label: "Standard revision only", percent: 11.7 }
+    ],
+    hitLabel: "GRAFT FAILED",
+    hitNarrative: "This roll landed on failure. The odds were better with LEAP than without it &mdash; but better odds was never the same thing as guaranteed odds.",
+    missLabel: "GRAFT HELD",
+    missNarrative: "This roll held. Try the other choice to feel the actual size of the difference LEAP makes across many rolls, not just one."
+  },
+  {
+    key: "longGame",
+    title: "The Long Game",
+    teaser: "Fast forward ten, twenty years. What's the knee actually like by then?",
+    label: "Chapter Five &mdash; The Long Game",
+    scene: "Fast forward ten, twenty years. The knee's been through a lot by now. Roughly half of everyone who's had an ACL or meniscus injury &mdash; surgery or not &mdash; ends up with some degree of osteoarthritis in that knee.",
+    percent: 50,
+    hitLabel: "DEVELOPED SOME OA",
+    hitNarrative: "Surgery doesn't quietly prevent this, and avoiding surgery doesn't either. This is roughly a coin flip either way, decades out.",
+    missLabel: "NO OA AT THIS POINT",
+    missNarrative: "This roll landed clear. Worth remembering it's close to 50/50 regardless of which path was taken to get here."
+  },
+  {
+    key: "writeYourOwn",
+    title: "Write Your Own Chapter",
+    teaser: "Pick any odds you like and see how they actually play out.",
+    label: "Chapter Six &mdash; Write Your Own",
+    scene: "Not every number belongs to a headline stat. Drag the slider to whatever odds you're curious about and roll.",
+    hasSlider: true,
+    hitLabel: "HIT",
+    hitNarrative: "That's what this percentage looks like landing on someone. Roll a few more times and watch the actual rate creep toward the number you set.",
+    missLabel: "MISS",
+    missNarrative: "Clear this time. One roll never tells the whole story &mdash; that's the entire point of rolling more than once."
+  }
+];
+
+let currentPath = null;
+let currentPercent = null;
+let rolls = 0;
+let hits = 0;
+let rolling = false;
+
+function goTo(screenId) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(screenId).classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function renderPaths() {
+  const list = document.getElementById('pathList');
+  list.innerHTML = '';
+  PATHS.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'path-card';
+    card.innerHTML = '<div class="path-title">' + p.title + '</div><div class="path-teaser">' + p.teaser + '</div>';
+    card.onclick = function() { selectPath(p); };
+    list.appendChild(card);
+  });
+}
+
+function selectPath(p) {
+  currentPath = p;
+  rolls = 0;
+  hits = 0;
+  document.getElementById('sceneLabel').innerHTML = p.label;
+  document.getElementById('sceneText').innerHTML = p.scene;
+
+  const subRow = document.getElementById('subchoiceRow');
+  subRow.innerHTML = '';
+  const rollBtn = document.getElementById('rollBtn');
+
+  if (p.hasSubchoice) {
+    subRow.style.display = 'flex';
+    subRow.style.flexDirection = 'row';
+    currentPercent = null;
+    rollBtn.disabled = true;
+    rollBtn.style.opacity = '0.4';
+    p.subchoices.forEach(function(sc) {
+      const btn = document.createElement('button');
+      btn.className = 'subchoice-btn';
+      btn.textContent = sc.label;
+      btn.onclick = function() {
+        currentPercent = sc.percent;
+        document.querySelectorAll('.subchoice-btn').forEach(function(b) { b.classList.remove('selected'); });
+        btn.classList.add('selected');
+        rollBtn.disabled = false;
+        rollBtn.style.opacity = '1';
+      };
+      subRow.appendChild(btn);
+    });
+  } else if (p.hasSlider) {
+    subRow.style.display = 'flex';
+    subRow.style.flexDirection = 'column';
+    currentPercent = 30;
+    const sliderWrap = document.createElement('div');
+    sliderWrap.style.width = '100%';
+    sliderWrap.innerHTML =
+      '<div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:6px;">' +
+      '<span>Odds</span><span id="sliderVal" style="color:var(--gold); font-weight:800;">30%</span></div>' +
+      '<input type="range" id="pathSlider" min="1" max="99" value="30" style="width:100%; accent-color: var(--gold);">';
+    subRow.appendChild(sliderWrap);
+    rollBtn.disabled = false;
+    rollBtn.style.opacity = '1';
+    setTimeout(function() {
+      document.getElementById('pathSlider').addEventListener('input', function(e) {
+        currentPercent = parseFloat(e.target.value);
+        document.getElementById('sliderVal').textContent = currentPercent + '%';
+      });
+    }, 0);
+  } else {
+    subRow.style.display = 'none';
+    currentPercent = p.percent;
+    rollBtn.disabled = false;
+    rollBtn.style.opacity = '1';
+  }
+
+  document.getElementById('die').textContent = '?';
+  goTo('screen-scene');
+}
+
+function roll() {
+  if (rolling || currentPercent === null) return;
+  rolling = true;
+  const die = document.getElementById('die');
+  die.classList.add('rolling');
+
+  let ticks = 0;
+  const maxTicks = 12;
+  const interval = setInterval(function() {
+    die.textContent = Math.floor(Math.random() * 100) + 1;
+    ticks++;
+    if (ticks >= maxTicks) {
+      clearInterval(interval);
+      finishRoll();
+    }
+  }, 60);
+}
+
+function finishRoll() {
+  const die = document.getElementById('die');
+  die.classList.remove('rolling');
+  const rollValue = Math.random() * 100;
+  const isHit = rollValue < currentPercent;
+  die.textContent = isHit ? '\u2716' : '\u2713';
+
+  rolls++;
+  if (isHit) hits++;
+
+  const banner = document.getElementById('resultBanner');
+  const narrative = document.getElementById('resultNarrative');
+  banner.innerHTML = isHit ? currentPath.hitLabel : currentPath.missLabel;
+  banner.className = 'result-banner ' + (isHit ? 'hit' : 'miss');
+  narrative.innerHTML = isHit ? currentPath.hitNarrative : currentPath.missNarrative;
+
+  document.getElementById('tallyRolls').textContent = rolls;
+  document.getElementById('tallyHits').textContent = hits;
+  document.getElementById('tallyHitsLabel').innerHTML = currentPath.hitLabel;
+  document.getElementById('tallyActual').textContent = ((hits / rolls) * 100).toFixed(1) + '%';
+
+  rolling = false;
+  goTo('screen-result');
+}
+
+renderPaths();
+</script>
+</body>
+</html>
