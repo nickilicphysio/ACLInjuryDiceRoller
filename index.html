@@ -364,22 +364,16 @@ const PATHS = [
     missNarrative: "This roll landed clear. Worth remembering it's close to 50/50 regardless of which path was taken to get here."
   },
   {
-    key: "complicationBreakdown",
-    title: "The Complication, Zoomed In",
-    teaser: "Which complication, and how likely, depends on what you're asking about.",
-    label: "Chapter Six &mdash; The Complication, Zoomed In",
-    scene: "Not every \"complication\" is the same event, and they don't all come from the same dataset &mdash; the headline 2-in-100 figure is a large US insurance-claims database, this breakdown comes from a smaller European cohort scanned specifically for clots. Pick one to roll.",
-    hasSubchoice: true,
-    subchoices: [
-      { label: "Infection", percent: 1 },
-      { label: "Symptomatic DVT", percent: 2.1 },
-      { label: "Pulmonary embolism", percent: 0.1 },
-      { label: "Arterial complication", percent: 0.3 }
-    ],
-    hitLabel: "COMPLICATION OCCURRED",
-    hitNarrative: "This one landed. Worth saying again &mdash; these come from a different, smaller cohort than the headline 2-in-100 figure. Not four slices of the same pie.",
-    missLabel: "CLEAR",
-    missNarrative: "No hit this time. Try a different one &mdash; some of these are genuinely rare events."
+    key: "complication",
+    title: "The Complication",
+    teaser: "Surgery's done. Still deep in early recovery. Does anything else go wrong first?",
+    label: "Chapter Six &mdash; The Complication",
+    scene: "The graft's in, you're a few weeks out, still deep in the early recovery fog. Most people just get on with rehab. A small number don't &mdash; something else goes wrong first: infection, a blood clot, a tendon giving way, a trip back to theatre to clear scar tissue. About 2 in 100 hit one of those before the 18-month mark.",
+    percent: 2,
+    hitLabel: "POST-OP COMPLICATION",
+    hitNarrative: "Not a re-tear, not a re-injury &mdash; a separate early hurdle: infection, DVT, tendon rupture, or a return to theatre for adhesions. Rare, but real, and worth knowing about before day one, not after.",
+    missLabel: "NO EARLY COMPLICATION",
+    missNarrative: "This roll landed clear. 98 in 100 do."
   },
   {
     key: "writeYourOwn",
